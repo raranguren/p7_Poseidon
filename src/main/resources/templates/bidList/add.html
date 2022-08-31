@@ -15,9 +15,39 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/bidList/validate}" th:object="${bidList}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
-			 -->
+			<!-- form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid -->
+			<div class="form-group">
+				<label for="account">Account</label>
+				<input type="text" class="form-control"
+					   id="account" placeholder="Account"
+					   th:field="*{account}" maxlength="30" required>
+				<div class="invalid-feedback"
+					 th:if="${#fields.hasErrors('account')}"
+					 th:errors="*{account}"></div>
+			</div>
+			<div class="form-group">
+				<label for="type">Type</label>
+				<input type="text" class="form-control" id="type" placeholder="Type"
+					   th:field="*{type}" maxlength="30">
+				<div class="invalid-feedback"
+					 th:if="${#fields.hasErrors('type')}"
+					 th:errors="*{type}"></div>
+			</div>
+			<div class="form-group">
+				<label for="bidQuantity">Bid quantity</label>
+				<input type="number" class="form-control" id="bidQuantity" placeholder="Bid quantity"
+					   th:field="*{bidQuantity}">
+				<div class="invalid-feedback"
+					 th:if="${#fields.hasErrors('bidQuantity')}"
+					 th:errors="*{bidQuantity}"></div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<a class="btn btn-warning" th:href="@{/bidList/list}">Cancel</a>
+					<input class="btn btn-primary" type="submit" value="Add bidList">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Add</button>
 		</form>
 	</div>
 

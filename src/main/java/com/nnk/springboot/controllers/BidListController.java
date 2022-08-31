@@ -1,6 +1,9 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.repositories.BidListRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,46 +13,89 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
+
+    private static final Logger log = LogManager.getLogger("BidListController");
+
+    // Inject Bid service
+    private final BidListRepository repository;
+    public BidListController(BidListRepository repository) {
+        this.repository = repository;
+    };
 
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
-        // TODO: call service find all bids to show to the view
+        // call service find all bids to show to the view
+        List<BidList> bidList = repository.findAll();
+        model.addAttribute("bidList", bidList);
+        log.info("GET /bidList/list - Showing a list of {} bids", bidList.size());
         return "bidList/list";
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bid) {
+    public String addBidForm(BidList bidList) {
+        log.info("GET /bidlist/add - Showing form");
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-        return "bidList/add";
+    public String validate(@Valid BidList bidList, BindingResult result, Model model) {
+        // check data valid and save to db, after saving return bid list
+        if (result.hasErrors()) {
+            log.info("POST /bidList/validate - HAS ERRORS, showing form");
+            return "bidList/add";
+        }
+        repository.save(bidList);
+        log.info("POST /bidList/validate - ADDED 1 new entry, returning to list");
+        return "bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
-        return "bidList/update";
+        // get Bid by Id and to model then show to the form
+        Optional<BidList> existingBid = repository.findById(id);
+        if (existingBid.isPresent()) {
+            model.addAttribute("bid", existingBid.get());
+            log.info("GET /bidList/update({}) - EXISTS - Showing form", id);
+            return "bidList/update";
+        }
+        log.info("GET /bidList/update({}) - DOES NOT EXIST - returning to list", id);
+        return "bidList/list";
     }
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
+        // check required fields, if valid call service to update Bid and return list Bid
+        Optional<BidList> existingBid = repository.findById(id);
+        if (existingBid.isPresent()) {
+            if (result.hasErrors()) {
+                log.info("POST /bidList/update({}) - HAS ERRORS, showing form", id);
+                return "bidList/update/" + id;
+            }
+            repository.save(bidList);
+            log.info("POST /bidList/update({}) - UPDATED 1 entry, returning to list", id);
+            return "redirect:/bidList/list";
+        }
+        log.info("POST /bidList/update({}) - DOES NOT EXIST - returning to list", id);
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
+        // Find Bid by Id and delete the bid, return to Bid list
+        Optional<BidList> existingBid = repository.findById(id);
+        if (existingBid.isPresent()) {
+            repository.deleteById(id);
+            log.info("GET /bidList/delete({}) - DELETED 1 entry, returning to list", id);
+            return "redirect:/bidList/list";
+        }
+        log.info("GET /bidList/update({}) - DOES NOT EXIST - returning to list", id);
         return "redirect:/bidList/list";
     }
 }
