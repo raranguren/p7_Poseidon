@@ -38,15 +38,15 @@
 			</thead>
 			<tbody>
 				<!-- Show all Bids to the table, the Action column will have Edit & Delete buttons -->
-				<tr th:each="bidList : ${bidList}">
-					<td th:text="bidList.bidListId"></td>
-					<td th:text="bidList.account"></td>
-					<td th:text="bidList.type"></td>
-					<td th:text="${#numbers.formatDecimal(bidList.bidQuantity, 0, 'COMMA', 2, 'POINT')}"></td>
+				<tr th:each="item : ${list}">
+					<td th:text="item.bidListId"></td>
+					<td th:text="item.account"></td>
+					<td th:text="item.type"></td>
+					<td th:text="${#numbers.formatDecimal(item.bidQuantity, 0, 'COMMA', 2, 'POINT')}"></td>
 					<td>
-						<a th:href="@{/bidList/update(id=bidList.id)}" class="btn btn-link btn-sm">Edit</a>
+						<a th:href="@{/bidList/update(id=item.id)}" class="btn btn-link btn-sm">Edit</a>
 						|
-						<a th:href="@{/bidList/delete(id=bidList.id)}" class="btn btn-link btn-sm">Delete</a>
+						<a th:href="@{/bidList/delete(id=item.id)}" class="btn btn-link btn-sm">Delete</a>
 					</td>
 				</tr>
 			</tbody>

@@ -31,9 +31,9 @@ public class BidListController {
     public String home(Model model)
     {
         // call service find all bids to show to the view
-        List<BidList> bidList = service.readAll();
-        model.addAttribute("bidList", bidList);
-        log.info("GET /bidList/list - Showing a list of {} bids", bidList.size());
+        List<BidList> list = service.readAll();
+        model.addAttribute("list", list);
+        log.info("GET /bidList/list - Showing a list of {} bids", list.size());
         return "bidList/list";
     }
 

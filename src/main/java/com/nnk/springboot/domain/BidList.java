@@ -60,7 +60,7 @@ public class BidList {
     @Size(max = 125, message = "{size.max}")
     private String creationName;
 
-    private Timestamp creationDate;
+    private Timestamp creationDate = new Timestamp(System.currentTimeMillis());
 
     @Size(max = 125, message = "{size.max}")
     private String revisionName;
