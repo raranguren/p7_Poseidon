@@ -25,7 +25,7 @@
 	</div>
 	<div class="row"><h2>Curve Point List</h2></div>
 	<div class="row">
-		<a href="/curvePoint/add" class="btn btn-primary btn-sm">Add New</a>
+		<a th:href="@{/curvePoint/add}" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -37,7 +37,18 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all CurvePoint to the table, the action column will have Edit & Delete buttons -->
+				<!-- Show all CurvePoint to the table, the action column will have Edit & Delete buttons -->
+				<tr th:each="item : ${list}">
+					<td th:text="item.id"></td>
+					<td th:text="item.curveId"></td>
+					<td th:text="item.term"></td>
+					<td th:text="item.value"></td>
+					<td>
+						<a th:href="@{/curvePoint/update(id=item.id)}" class="btn btn-link btn-sm">Edit</a>
+						|
+						<a th:href="@{/curvePoint/delete(id=item.id)}" class="btn btn-link btn-sm">Delete</a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
