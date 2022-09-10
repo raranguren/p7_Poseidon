@@ -52,7 +52,7 @@ public class CurveController {
         }
         service.create(curvePoint);
         log.info("POST /curvePoint/validate - ADDED 1 new entry, returning to list");
-        return "curvePoint/add";
+        return "curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
