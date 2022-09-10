@@ -11,7 +11,7 @@ public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BidListId")
-    private Integer id;
+    private Integer bidListId;
 
     @NotBlank(message = "{mandatory.account}")
     @Size(max = 30, message = "{size.max}")
@@ -92,7 +92,7 @@ public class BidList {
     // GETTERS
 
     public Integer getBidListId() {
-        return id;
+        return bidListId;
     }
 
     public String getAccount() {
