@@ -181,6 +181,10 @@ public class BidList {
 
     // SETTERS
 
+    public void setBidListId(Integer bidListId) {
+        this.bidListId = bidListId;
+    }
+
     public void setAccount(String account) {
         this.account = account;
     }
