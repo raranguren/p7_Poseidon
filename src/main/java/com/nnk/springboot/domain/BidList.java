@@ -10,7 +10,6 @@ public class BidList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "BidListId")
     private Integer bidListId;
 
     @NotBlank(message = "{mandatory.account}")
