@@ -52,7 +52,7 @@ public class BidListController {
         }
         service.create(bidList);
         log.info("POST /bidList/validate - ADDED 1 new entry, returning to list");
-        return "bidList/list";
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
@@ -65,7 +65,7 @@ public class BidListController {
             return "bidList/update";
         }
         log.info("GET /bidList/update({}) - DOES NOT EXIST - returning to list", id);
-        return "bidList/list";
+        return "redirect:/bidList/list";
     }
 
     @PostMapping("/bidList/update/{id}")

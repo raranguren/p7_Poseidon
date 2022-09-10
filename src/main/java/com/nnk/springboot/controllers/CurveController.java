@@ -52,7 +52,7 @@ public class CurveController {
         }
         service.create(curvePoint);
         log.info("POST /curvePoint/validate - ADDED 1 new entry, returning to list");
-        return "curvePoint/list";
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
@@ -64,7 +64,7 @@ public class CurveController {
             log.info("GET /curvePoint/update({}) - EXISTS - Showing form", id);
         }
         log.info("GET /curvePoint/update({}] - DOES NOT EXIST - returning to list", id);
-        return "curvePoint/update";
+        return "redirect:/curvePoint/list";
     }
 
     @PostMapping("/curvePoint/update/{id}")
