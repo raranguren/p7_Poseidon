@@ -12,70 +12,71 @@ public class BidList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bidListId;
 
-    @NotBlank(message = "{mandatory.account}")
-    @Size(max = 30, message = "{size.max}")
+    @NotBlank(message = "Account is mandatory")
+    @Size(max = 30, message = "Maximum of {max} characters")
     private String account;
 
-    @NotBlank(message = "{mandatory.type}")
-    @Size(max = 30, message = "{size.max}")
+    @NotBlank(message = "Type is mandatory")
+    @Size(max = 30, message = "Maximum of {max} characters")
     private String type;
 
-    @Positive(message = "{positive}")
-    @DecimalMax(value = "2", message = "{decimals.max}")
+    @Positive(message = "Must be a positive number")
+    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @NotBlank(message = "Bid Quantity is mandatory")
     private Double bidQuantity;
 
-    @Positive(message = "{positive}")
-    @DecimalMax(value = "2", message = "{decimals.max}")
+    @Positive(message = "Must be a positive number")
+    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
     private Double askQuantity;
 
-    @Positive(message = "{positive}")
-    @DecimalMax(value = "2", message = "{decimals.max}")
+    @Positive(message = "Must be a positive number")
+    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
     private Double bid;
 
-    @Positive(message = "{positive}")
-    @DecimalMax(value = "2", message = "{decimals.max}")
+    @Positive(message = "Must be a positive number")
+    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
     private Double ask;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String benchmark;
 
     private Timestamp bidListDate;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String commentary;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String security;
 
-    @Size(max = 10, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String status;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String trader;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String book;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String creationName;
 
     private Timestamp creationDate = new Timestamp(System.currentTimeMillis());
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String revisionName;
 
     private Timestamp revisionDate;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String dealName;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String dealType;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String sourceListId;
 
-    @Size(max = 125, message = "{size.max}")
+    @Size(max = 125, message = "Maximum of {max} characters")
     private String side;
 
     // CONSTRUCTORS

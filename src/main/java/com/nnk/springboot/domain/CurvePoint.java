@@ -1,9 +1,6 @@
 package com.nnk.springboot.domain;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
@@ -19,14 +16,16 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "CurveId")
-    @NotNull(message = "{not.null}")
-    @Positive(message = "{positive}")
+    @NotNull(message = "Curve Id is mandatory")
+    @Positive(message = "Must be a positive number")
     private Integer curveId;
 
     private Timestamp asOfDate;
 
+    @NotNull(message = "Term is mandatory")
     private Double term;
 
+    @NotNull(message = "Value is mandatory")
     private Double value;
 
     private Timestamp creationDate = new Timestamp(System.currentTimeMillis());
