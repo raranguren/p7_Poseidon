@@ -40,7 +40,20 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all RuleName to the table, the Action column will have Edit & Delete buttons -->
+				<!-- Show all RuleName to the table, the Action column will have Edit & Delete buttons -->
+				<tr th:each="item : ${list}">
+					<td th:text="${item.id}"></td>
+					<td th:text="${item.name}"></td>
+					<td th:text="${item.description}"></td>
+					<td th:text="${item.json}"></td>
+					<td th:text="${item.template}"></td>
+					<td th:text="${item.sqlStr}"></td>
+					<td th:text="${item.sqlPart}"></td>
+					<td style="width: 15%" class="text-center">
+						<a th:href="@{/ruleName/update/{id}(id=${item.id})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/ruleName/delete/{id}(id=${item.id})}">Delete</a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
