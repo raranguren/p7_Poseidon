@@ -37,7 +37,17 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all Trade to the table, the Action column will have Edit & Delete buttons -->
+				<!-- Show all Trade to the table, the Action column will have Edit & Delete buttons -->
+				<tr th:each="item : ${list}">
+					<td th:text="${item.tradeId}"></td>
+					<td th:text="${item.account}"></td>
+					<td th:text="${item.type}"></td>
+					<td th:text="${#numbers.formatDecimal(item.buyQuantity, 0, 'COMMA', 2, 'POINT')}"></td>
+					<td style="width: 15%" class="text-center">
+						<a th:href="@{/trade/update/{id}(id=${item.id})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/trade/delete/{id}(id=${item.id})}">Delete</a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
