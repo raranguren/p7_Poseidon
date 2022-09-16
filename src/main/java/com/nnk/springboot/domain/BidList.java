@@ -5,11 +5,11 @@ import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "bidlist")
+@Table(name = "BidList")
 public class BidList {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bidListId;
 
     @NotBlank(message = "Account is mandatory")
@@ -21,20 +21,20 @@ public class BidList {
     private String type;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
-    @NotBlank(message = "Bid Quantity is mandatory")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
+    @NotNull(message = "Bid Quantity is mandatory")
     private Double bidQuantity;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double askQuantity;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double bid;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double ask;
 
     @Size(max = 125, message = "Maximum of {max} characters")

@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 
 
 @Entity
-@Table(name = "trade")
+@Table(name = "Trade")
 public class Trade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tradeId;
 
     @NotBlank(message = "Account is mandatory")
@@ -22,20 +22,19 @@ public class Trade {
     private String type;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
-    @NotNull(message = "Buy quantity is mandatory")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double buyQuantity;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double sellQuantity;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double buyPrice;
 
     @Positive(message = "Must be a positive number")
-    @DecimalMax(value = "2", message = "Must not have more than {value} decimals")
+    @Digits(fraction = 2, integer = 10, message = "Must not have more than {fraction} decimals")
     private Double sellPrice;
 
     private Timestamp tradeDate;
