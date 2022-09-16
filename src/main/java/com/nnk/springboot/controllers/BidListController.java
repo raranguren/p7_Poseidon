@@ -60,7 +60,7 @@ public class BidListController {
         // get Bid by Id and to model then show to the form
         Optional<BidList> existingBid = service.read(id);
         if (existingBid.isPresent()) {
-            model.addAttribute("bid", existingBid.get());
+            model.addAttribute("bidList", existingBid.get());
             log.info("GET /bidList/update({}) - EXISTS - Showing form", id);
             return "bidList/update";
         }
