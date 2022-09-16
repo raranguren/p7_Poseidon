@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser() {
+    public String addUser(User user) {
         log.info("GET /user/add - Showing form");
         return "user/add";
     }
