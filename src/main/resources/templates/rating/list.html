@@ -41,9 +41,9 @@
 				<!-- Show all Rating to the table, the Action column will have Edit & Delete buttons -->
 				<tr th:each="item : ${list}">
 					<td th:text="${item.id}"></td>
-					<td th:text="${#numbers.formatDecimal(item.moodysRating, 0, 'COMMA', 3, 'POINT')}"></td>
-					<td th:text="${#numbers.formatDecimal(item.sandPRating, 0, 'COMMA', 3, 'POINT')}"></td>
-					<td th:text="${#numbers.formatDecimal(item.fitchRating, 0, 'COMMA', 3, 'POINT')}"></td>
+					<td th:text="${item.moodysRating}"></td>
+					<td th:text="${item.sandPRating}"></td>
+					<td th:text="${item.fitchRating}"></td>
 					<td th:text="${item.orderNumber}"></td>
 					<td style="width: 15%" class="text-center">
 						<a th:href="@{/rating/update/{id}(id=${item.id})}">Edit</a>&nbsp;|&nbsp;
