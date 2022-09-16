@@ -75,6 +75,7 @@ public class CurveController {
             log.info("POST /curvePoint/UPDATE({}) - HAS ERRORS, showing form", id);
             return "curvePoint/update/" + id;
         }
+        curvePoint.setId(id);
         service.update(curvePoint);
         log.info("POST /curvePoint/UPDATE({}) - updated 1 ENTRY, RETURNING TO LIST", id);
         return "redirect:/curvePoint/list";

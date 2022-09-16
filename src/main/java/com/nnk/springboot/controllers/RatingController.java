@@ -75,6 +75,7 @@ public class RatingController {
             log.info("POST /rating/update({}) - HAS ERRORS, showing form", id);
             return "rating/update/" + id;
         }
+        rating.setId(id);
         service.update(rating);
         log.info("POST /rating/update({}) - UPDATED 1 entry, returning to list", id);
         return "redirect:/rating/list";

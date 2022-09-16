@@ -75,6 +75,7 @@ public class TradeController {
             log.info("POST /trade/update({}) - HAS ERRORS, showing form", id);
             return "trade/update/" + id;
         }
+        trade.setTradeId(id);
         service.update(trade);
         log.info("POST /trade/update({}) - UPDATED 1 entry, returning to list", id);
         return "redirect:/trade/list";

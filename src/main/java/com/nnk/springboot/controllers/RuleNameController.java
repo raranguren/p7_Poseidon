@@ -75,6 +75,7 @@ public class RuleNameController {
             log.info("POST /ruleName/update({}) - HAS ERRORS, showing form", id);
             return "ruleName/update/" + id;
         }
+        ruleName.setId(id);
         service.update(ruleName);
         log.info("POST /ruleName/update({}) - UPDATED 1 rule name, returning to list", id);
         return "redirect:/ruleName/list";

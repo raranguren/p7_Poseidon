@@ -76,6 +76,7 @@ public class BidListController {
             log.info("POST /bidList/update({}) - HAS ERRORS, showing form", id);
             return "bidList/update/" + id;
         }
+        bidList.setBidListId(id);
         service.update(bidList);
         log.info("POST /bidList/update({}) - UPDATED 1 entry, returning to list", id);
         return "redirect:/bidList/list";
