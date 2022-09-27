@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public abstract class CrudService<T> {
 
-    private final JpaRepository<T, Integer> repository;
+    protected final JpaRepository<T, Integer> repository;
     CrudService(JpaRepository<T, Integer> repository) {
         this.repository = repository;
     }
