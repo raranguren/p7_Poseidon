@@ -37,7 +37,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String addUser(Trade trade) {
         log.info("GET /trade/add - showing form");
         return "trade/add";
     }
@@ -73,7 +73,7 @@ public class TradeController {
         // check required fields, if valid call service to update Trade and return Trade list
         if (result.hasErrors()) {
             log.info("POST /trade/update({}) - HAS ERRORS, showing form", id);
-            return "trade/update/" + id;
+            return "trade/update";
         }
         trade.setTradeId(id);
         service.update(trade);

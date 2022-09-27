@@ -73,7 +73,7 @@ public class RatingController {
         // check required fields, if valid call service to update Rating and return Rating list
         if (result.hasErrors()) {
             log.info("POST /rating/update({}) - HAS ERRORS, showing form", id);
-            return "rating/update/" + id;
+            return "rating/update";
         }
         rating.setId(id);
         service.update(rating);

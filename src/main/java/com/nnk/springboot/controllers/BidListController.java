@@ -38,7 +38,7 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bidList) {
+    public String addForm(BidList bidList) {
         log.info("GET /bidlist/add - Showing form");
         return "bidList/add";
     }
@@ -69,12 +69,12 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
+    public String update(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
         // check required fields, if valid call service to update Bid and return list Bid
         if (result.hasErrors()) {
             log.info("POST /bidList/update({}) - HAS ERRORS, showing form", id);
-            return "bidList/update/" + id;
+            return "bidList/update";
         }
         bidList.setBidListId(id);
         service.update(bidList);
@@ -83,7 +83,7 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String delete(@PathVariable("id") Integer id, Model model) {
         // Find Bid by Id and delete the bid, return to Bid list
         service.delete(id);
         log.info("GET /bidList/delete({}) - DELETED 1 entry, returning to list", id);

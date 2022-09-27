@@ -37,7 +37,7 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/add")
-    public String addRuleForm(RuleName bid) {
+    public String addRuleForm(RuleName rule) {
         log.info("GET /ruleName/add - Showing form");
         return "ruleName/add";
     }
@@ -73,7 +73,7 @@ public class RuleNameController {
         // check required fields, if valid call service to update RuleName and return RuleName list
         if (result.hasErrors()) {
             log.info("POST /ruleName/update({}) - HAS ERRORS, showing form", id);
-            return "ruleName/update/" + id;
+            return "ruleName/update";
         }
         ruleName.setId(id);
         service.update(ruleName);

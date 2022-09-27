@@ -1,9 +1,9 @@
 package com.nnk.springboot.unit.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nnk.springboot.controllers.BidListController;
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.controllers.UserController;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,50 +21,50 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = BidListController.class, secure = false)
+@WebMvcTest(controllers = UserController.class, secure = false)
 @RunWith(SpringRunner.class)
-public class BidListControllerTest {
+public class UserControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @MockBean
-    BidListService service;
+    UserService service;
 
-    BidList exampleObject;
+    User exampleObject;
 
     @Before
     public void before_each_test() {
-        exampleObject = new BidList("account","type",12.34);
+        exampleObject = new User("full name", "username", "Pass.w00rd", "USER");
     }
 
     @Test
     public void list() throws Exception {
-        mockMvc.perform(get("/bidList/list"))
+        mockMvc.perform(get("/user/list"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("bidList/list"))
-                .andExpect(model().attributeExists("list"));
+                .andExpect(view().name("user/list"))
+                .andExpect(model().attributeExists("users"));
     }
 
     @Test
     public void add_form() throws Exception {
-        mockMvc.perform(get("/bidList/add"))
+        mockMvc.perform(get("/user/add"))
                 .andExpect((status().is2xxSuccessful()))
-                .andExpect(view().name("bidList/add"));
+                .andExpect(view().name("user/add"));
     }
 
     @Test
     public void update_form() throws Exception {
         when(service.read(1234)).thenReturn(Optional.of(exampleObject));
-        mockMvc.perform(get("/bidList/update/1234"))
+        mockMvc.perform(get("/user/update/1234"))
                 .andExpect((status().is2xxSuccessful()))
-                .andExpect(view().name("bidList/update"));
+                .andExpect(view().name("user/update"));
     }
 
     @Test
     public void add_action() throws Exception {
         String json = new ObjectMapper().writeValueAsString(exampleObject);
-        mockMvc.perform(post("/bidList/validate")
+        mockMvc.perform(post("/user/validate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().is2xxSuccessful());
@@ -72,10 +72,10 @@ public class BidListControllerTest {
 
     @Test
     public void update_action() throws Exception {
-        exampleObject.setBidListId(1234);
+        exampleObject.setId(1234);
         when(service.read(1234)).thenReturn(Optional.of(exampleObject));
         String json = new ObjectMapper().writeValueAsString(exampleObject);
-        mockMvc.perform(post("/bidList/update/1234")
+        mockMvc.perform(post("/user/update/1234")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().is2xxSuccessful());
@@ -84,7 +84,7 @@ public class BidListControllerTest {
     @Test
     public void delete_action() throws Exception {
         when(service.read(1234)).thenReturn(Optional.of(exampleObject));
-        mockMvc.perform(get("/bidList/delete/1234"))
+        mockMvc.perform(get("/user/delete/1234"))
                 .andExpect(status().is3xxRedirection());
     }
 

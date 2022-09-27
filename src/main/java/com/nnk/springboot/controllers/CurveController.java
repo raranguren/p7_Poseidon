@@ -38,7 +38,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
+    public String addForm(CurvePoint curvePoint) {
         log.info("GET /curvePoint/add - Showing form");
         return "curvePoint/add";
     }
@@ -48,7 +48,7 @@ public class CurveController {
         // check data valid and save to db, after saving return Curve list
         if (result.hasErrors()) {
             log.info("POST /curvePoint/validate - HAS ERRORS, showing form");
-            return "bidList/add";
+            return "curvePoint/add";
         }
         service.create(curvePoint);
         log.info("POST /curvePoint/validate - ADDED 1 new entry, returning to list");
@@ -62,18 +62,19 @@ public class CurveController {
         if (existingObject.isPresent()) {
             model.addAttribute("curvePoint", existingObject.get());
             log.info("GET /curvePoint/update({}) - EXISTS - Showing form", id);
+            return "curvePoint/update";
         }
         log.info("GET /curvePoint/update({}] - DOES NOT EXIST - returning to list", id);
         return "redirect:/curvePoint/list";
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+    public String update(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
         // check required fields, if valid call service to update Curve and return Curve list
         if (result.hasErrors()) {
             log.info("POST /curvePoint/UPDATE({}) - HAS ERRORS, showing form", id);
-            return "curvePoint/update/" + id;
+            return "curvePoint/update";
         }
         curvePoint.setId(id);
         service.update(curvePoint);
@@ -82,7 +83,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String delete(@PathVariable("id") Integer id, Model model) {
         // Find Curve by Id and delete the Curve, return to Curve list
         service.delete(id);
         log.info("GET /curvePoint/delete({}) - DELETED 1 entry, returning to list", id);
