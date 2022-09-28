@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class UserDetailsServiceTest {
     @Mock
     UserRepository repository;
 
-    @Test
+    @Test(expected = UsernameNotFoundException.class)
     public void user_not_found () {
         userDetailsServiceTest.loadUserByUsername("testName");
         verify(repository).findOneByUsername("testName");
