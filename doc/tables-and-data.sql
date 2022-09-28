@@ -98,5 +98,9 @@ CREATE TABLE Users (
 
 ######  DATA  ######
 
-insert into Users(fullname, username, password, role) values('Administrator', 'admin', '$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa', 'ADMIN');
-insert into Users(fullname, username, password, role) values('User', 'user', '$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa', 'USER');
+### username=admin
+### password=Demo.123
+insert into Users(fullname, username, password, role) values('Administrator', 'admin', '$2a$10$7GIaa9l9qgMqcw5BXZH0vOSjzwy4R60uNF.OJDY3EC7pL3fCyJk1y', 'ADMIN');
+### username=user
+### password=Demo.123
+insert into Users(fullname, username, password, role) values('User', 'user', '$2a$10$7GIaa9l9qgMqcw5BXZH0vOSjzwy4R60uNF.OJDY3EC7pL3fCyJk1y', 'USER');
