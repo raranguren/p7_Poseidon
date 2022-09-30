@@ -22,7 +22,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 .and()
                 .oauth2Login()
-                // TODO - get correct user name from github
                 .and()
                 .logout().logoutUrl("/app-logout")
                 .invalidateHttpSession(true)

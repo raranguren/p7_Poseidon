@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.services.RuleNameService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,12 +29,15 @@ public class RuleNameController {
     }
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
+    public String home(Model model, Principal principal)
     {
         // find all RuleName, add to model
         List<RuleName> list = service.readAll();
+        String username = principal instanceof OAuth2AuthenticationToken ?
+                ((OAuth2AuthenticationToken)principal).getPrincipal().getAttributes().get("login").toString() :
+                principal.getName();
         model.addAttribute("list", list);
-        log.info("GET /ruleName/list - Showing a list of {} trades", list.size());
+        model.addAttribute("username", username);        log.info("GET /ruleName/list - Showing a list of {} trades", list.size());
         return "ruleName/list";
     }
 
