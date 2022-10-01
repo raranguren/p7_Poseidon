@@ -4,7 +4,7 @@ A learning exercise about implementing features to an existing app, following us
 
 ## Technical:
 
-1. Framework: Spring Boot v2.0.4
+1. Framework: Spring Boot v2.0.9
 2. Java 8
 3. Thymeleaf
 4. Bootstrap v.4.3.1
